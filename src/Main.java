@@ -4,41 +4,45 @@ import java.util.regex.Matcher;
 
 public class TrainValidationApp {
 
+    // Method to validate Train ID
+    public static boolean isValidTrainId(String trainId) {
+        String trainRegex = "TRN-\\d{4}";
+        Pattern pattern = Pattern.compile(trainRegex);
+        Matcher matcher = pattern.matcher(trainId);
+        return matcher.matches();
+    }
+
+    // Method to validate Cargo Code
+    public static boolean isValidCargoCode(String cargoCode) {
+        String cargoRegex = "PET-[A-Z]{2}";
+        Pattern pattern = Pattern.compile(cargoRegex);
+        Matcher matcher = pattern.matcher(cargoCode);
+        return matcher.matches();
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        // Step 1: Take user input
+        // Input from user
         System.out.print("Enter Train ID: ");
         String trainId = sc.nextLine();
 
         System.out.print("Enter Cargo Code: ");
         String cargoCode = sc.nextLine();
 
-        // Step 2: Define regex patterns
-        String trainRegex = "TRN-\\d{4}";
-        String cargoRegex = "PET-[A-Z]{2}";
+        // Validation
+        boolean trainValid = isValidTrainId(trainId);
+        boolean cargoValid = isValidCargoCode(cargoCode);
 
-        // Step 3: Compile patterns
-        Pattern trainPattern = Pattern.compile(trainRegex);
-        Pattern cargoPattern = Pattern.compile(cargoRegex);
-
-        // Step 4: Create matcher objects
-        Matcher trainMatcher = trainPattern.matcher(trainId);
-        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
-
-        // Step 5: Validate using matches()
-        boolean isTrainValid = trainMatcher.matches();
-        boolean isCargoValid = cargoMatcher.matches();
-
-        // Step 6: Display result
-        if (isTrainValid) {
+        // Output
+        if (trainValid) {
             System.out.println("Train ID is VALID ✅");
         } else {
             System.out.println("Train ID is INVALID ❌");
         }
 
-        if (isCargoValid) {
+        if (cargoValid) {
             System.out.println("Cargo Code is VALID ✅");
         } else {
             System.out.println("Cargo Code is INVALID ❌");
